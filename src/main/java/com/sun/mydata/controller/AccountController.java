@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //@RestController=@Controller+@ResponseBody
-//second分支
+//second分支 
 @RestController
 @RequestMapping("/account")
 public class AccountController {

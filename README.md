@@ -1,5 +1,6 @@
 # mydata
-学习SpringBoot/MyBatis整合与Git提交
+学习SpringBoot与各项技术的整合
+目前使用的技术SpringBoot+Maven+Git+MySQL+MyBatis
 
 ### 学习历程
 -----------------------------------------------------------------------------

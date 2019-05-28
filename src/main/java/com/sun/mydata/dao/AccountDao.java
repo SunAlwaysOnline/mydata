@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface AccountDao {
     public Account findById(int id);
+
+    public Integer updateById(Account account);
 }

@@ -7,4 +7,10 @@
     <select id="findById" parameterType="int" resultType="com.sun.mydata.domain.Account">
         select * from account where id=#{id}
     </select>
+
+    <update id="updateById" parameterType="com.sun.mydata.domain.Account">
+        update account
+        set name=#{name},money=#{money}
+        where id=#{id}
+    </update>
 </mapper>

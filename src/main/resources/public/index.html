@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>主页面</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<p>查询账户信息</p>
+			<input type="text" id="text_id">
+			<button id="btn_s_account">查找</button>
+			<span id="s_name" style="margin-left: 10px;margin-right: 10px;"></span>
+			<span id="s_money" style="margin-left: 10px;margin-right: 10px;"></span>
+		</div>
+		<hr />
+		<div>
+			<p>修改账户信息</p>
+			<input type="text" id="u_id" hidden="hidden">
+			姓名:<input type="text" id="u_name">
+			余额:<input type="text" id="u_money">
+			<button id="btn_u_account">修改</button>
+			<span id="u_info" style="margin-left: 10px;margin-right: 10px;"></span>
+		</div>
+
+	</body>
+	<!--查找账户信息-->
+	<script>
+		$("#btn_s_account").click(function() {
+			$.ajax({
+				url: "/account/" + $("#text_id").val(),
+				dataType: "json",
+				success: function(data) {
+					$("#s_name").text("姓名:" + data.name);
+					$("#s_money").text("余额:" + data.money)
+
+
+					$("#u_id").val(data.id);
+					$("#u_name").val(data.name)
+					$("#u_money").val(+data.money)
+
+				},
+				error: function(err) {
+					alert("请求失败!");
+				}
+			})
+		});
+	</script>
+
+	<!--更新用户信息-->
+	<script>
+		$("#btn_u_account").click(function() {
+			$.ajax({
+				url: "/account/update",
+				dataType: "json",
+				data: {
+					id: $("#u_id").val(),
+					name: $("#u_name").val(),
+					money: $("#u_money").val()
+				},
+				success: function(data) {
+					alert(data.info);
+				},
+				error: function(err) {
+					alert("更新账户信息失败!");
+				}
+			})
+		});
+	</script>
+</html>

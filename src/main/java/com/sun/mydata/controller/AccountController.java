@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //@RestController=@Controller+@ResponseBody
-//这是主分支
+//这是主分支内的注释
+//这是second分支内的注释
+//已经将second分支内代码合并到主分支中
 @RestController
 @RequestMapping("/account")
 public class AccountController {

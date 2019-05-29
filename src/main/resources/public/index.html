@@ -20,7 +20,13 @@
 			姓名:<input type="text" id="u_name">
 			余额:<input type="text" id="u_money">
 			<button id="btn_u_account">修改</button>
-			<span id="u_info" style="margin-left: 10px;margin-right: 10px;"></span>
+		</div>
+		<hr />
+		<div>
+			<p>增加账户信息</p>
+			姓名:<input type="text" id="a_name">
+			余额:<input type="text" id="a_money">
+			<button id="btn_a_account">增加</button>
 		</div>
 
 	</body>
@@ -34,7 +40,6 @@
 					$("#s_name").text("姓名:" + data.name);
 					$("#s_money").text("余额:" + data.money)
 
-
 					$("#u_id").val(data.id);
 					$("#u_name").val(data.name)
 					$("#u_money").val(+data.money)
@@ -47,7 +52,7 @@
 		});
 	</script>
 
-	<!--更新用户信息-->
+	<!--更新账户信息-->
 	<script>
 		$("#btn_u_account").click(function() {
 			$.ajax({
@@ -63,6 +68,26 @@
 				},
 				error: function(err) {
 					alert("更新账户信息失败!");
+				}
+			})
+		});
+	</script>
+
+	<!--增加账户信息-->
+	<script>
+		$("#btn_a_account").click(function() {
+			$.ajax({
+				url: "/account/add",
+				dataType: "json",
+				data: {
+					name: $("#a_name").val(),
+					money: $("#a_money").val()
+				},
+				success: function(data) {
+					alert(data.info);
+				},
+				error: function(err) {
+					alert("增加账户信息失败!");
 				}
 			})
 		});

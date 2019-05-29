@@ -9,4 +9,6 @@ public interface AccountDao {
     public Account findById(int id);
 
     public Integer updateById(Account account);
+
+    public Integer add(Account account);
 }

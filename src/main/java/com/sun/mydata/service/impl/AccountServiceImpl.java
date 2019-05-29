@@ -36,10 +36,23 @@ public class AccountServiceImpl implements AccountService {
     //首先让数据库执行更新操作，之后更新redis
     @Override
     public Integer updateById(Account account) {
-        Integer i=accountDao.updateById(account);
-        if(i>0){
-            redisTemplate.opsForValue().set(account.getId(),account);
+        Integer i = accountDao.updateById(account);
+        if (i > 0) {
+            redisTemplate.opsForValue().set(account.getId(), account);
+            System.out.println("Redis中新增ID"+account.getId()+"的账户信息!");
         }
         return i;
     }
+
+    //新增账户信息
+    @Override
+    public Integer add(Account account) {
+        Integer i = accountDao.add(account);
+        if (i > 0) {
+            redisTemplate.opsForValue().set(account.getId(), account);
+        }
+        return i;
+    }
+
+
 }

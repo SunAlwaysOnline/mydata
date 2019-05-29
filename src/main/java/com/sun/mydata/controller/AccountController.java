@@ -31,6 +31,11 @@ public class AccountController {
         return accountService.findById(id);
     }
 
+    /**
+     * 更新账户信息
+     * @param account
+     * @return
+     */
     @RequestMapping("/update")
     public HashMap<String, String> update(Account account) {
         HashMap<String, String> map = new HashMap<>();
@@ -41,6 +46,25 @@ public class AccountController {
         } else {
             map.put("success", "false");
             map.put("info", "更新失败");
+        }
+        return map;
+    }
+
+    /**
+     * 增加账户信息
+     * @param account
+     * @return
+     */
+    @RequestMapping("/add")
+    public HashMap<String, String> add(Account account) {
+        HashMap<String, String> map = new HashMap<>();
+        Integer i = accountService.add(account);
+        if (i > 0) {
+            map.put("success", "true");
+            map.put("info", "增加成功");
+        } else {
+            map.put("success", "false");
+            map.put("info", "增加失败");
         }
         return map;
     }

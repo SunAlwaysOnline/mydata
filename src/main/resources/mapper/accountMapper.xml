@@ -13,4 +13,9 @@
         set name=#{name},money=#{money}
         where id=#{id}
     </update>
+
+    <insert id="add" parameterType="com.sun.mydata.domain.Account" useGeneratedKeys="true" keyProperty="id">
+        insert into account(name,money)
+        values(#{name},#{money})
+    </insert>
 </mapper>

@@ -1,6 +1,12 @@
 # mydata
 学习SpringBoot与各项技术的整合
-目前使用的技术SpringBoot+Maven+Git+MySQL+MyBatis
+
+主体框架:SpringBoot
+项目构建:Maven
+版本控制:Git
+数据库:MySQL
+ORM映射:MyBatis
+日志管理:Log4j
 
 ### 学习历程
 -----------------------------------------------------------------------------

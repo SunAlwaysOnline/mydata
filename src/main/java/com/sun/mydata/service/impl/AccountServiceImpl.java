@@ -3,12 +3,18 @@ package com.sun.mydata.service.impl;
 import com.sun.mydata.dao.AccountDao;
 import com.sun.mydata.domain.Account;
 import com.sun.mydata.service.AccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class AccountServiceImpl implements AccountService {
+
+    private static  final Logger logger= LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -24,10 +30,10 @@ public class AccountServiceImpl implements AccountService {
         if (null == o) {
             account = accountDao.findById(id);
             redisTemplate.opsForValue().set(id, account);
-            System.out.println("redis中不存在id为" + id + "的账户信息!");
+            logger.debug("redis中不存在id为" + id + "的账户信息!");
         } else {
             account = (Account) o;
-            System.out.println("redis中存在id为" + id + "的账户信息!");
+            logger.debug("redis中存在id为" + id + "的账户信息!");
         }
 
         return account;
@@ -39,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
         Integer i = accountDao.updateById(account);
         if (i > 0) {
             redisTemplate.opsForValue().set(account.getId(), account);
-            System.out.println("Redis中新增ID"+account.getId()+"的账户信息!");
+            logger.debug("数据库中更改了ID为"+account.getId()+"的账户信息,Redis中同样更新了此ID");
         }
         return i;
     }
@@ -50,6 +56,7 @@ public class AccountServiceImpl implements AccountService {
         Integer i = accountDao.add(account);
         if (i > 0) {
             redisTemplate.opsForValue().set(account.getId(), account);
+            logger.debug("数据库中新增ID为"+account.getId()+"的账户信息,Redis中同样新增了此ID");
         }
         return i;
     }

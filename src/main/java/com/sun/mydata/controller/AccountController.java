@@ -33,14 +33,15 @@ public class AccountController {
 
     /**
      * 更新账户信息
+     *
      * @param account
      * @return
      */
     @RequestMapping("/update")
     public HashMap<String, String> update(Account account) {
         HashMap<String, String> map = new HashMap<>();
-        Integer i = accountService.updateById(account);
-        if (i > 0) {
+        boolean flag = accountService.updateById(account);
+        if (flag) {
             map.put("success", "true");
             map.put("info", "更新成功");
         } else {
@@ -52,14 +53,15 @@ public class AccountController {
 
     /**
      * 增加账户信息
+     *
      * @param account
      * @return
      */
     @RequestMapping("/add")
     public HashMap<String, String> add(Account account) {
         HashMap<String, String> map = new HashMap<>();
-        Integer i = accountService.add(account);
-        if (i > 0) {
+        boolean flag = accountService.add(account);
+        if (flag) {
             map.put("success", "true");
             map.put("info", "增加成功");
         } else {
@@ -68,4 +70,5 @@ public class AccountController {
         }
         return map;
     }
+
 }

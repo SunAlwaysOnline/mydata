@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private static  final Logger logger= LoggerFactory.getLogger(AccountService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -41,25 +41,28 @@ public class AccountServiceImpl implements AccountService {
 
     //首先让数据库执行更新操作，之后更新redis
     @Override
-    public Integer updateById(Account account) {
+    public boolean updateById(Account account) {
+        boolean flag = false;
         Integer i = accountDao.updateById(account);
         if (i > 0) {
             redisTemplate.opsForValue().set(account.getId(), account);
-            logger.debug("数据库中更改了ID为"+account.getId()+"的账户信息,Redis中同样更新了此ID");
+            logger.debug("数据库中更改了ID为" + account.getId() + "的账户信息,Redis中同样更新了此ID");
+            flag = true;
         }
-        return i;
+        return true;
     }
 
     //新增账户信息
     @Override
-    public Integer add(Account account) {
+    public boolean add(Account account) {
+        boolean flag = false;
         Integer i = accountDao.add(account);
         if (i > 0) {
             redisTemplate.opsForValue().set(account.getId(), account);
-            logger.debug("数据库中新增ID为"+account.getId()+"的账户信息,Redis中同样新增了此ID");
+            logger.debug("数据库中新增ID为" + account.getId() + "的账户信息,Redis中同样新增了此ID");
+            flag = true;
         }
-        return i;
+        return flag;
     }
-
 
 }

@@ -1,0 +1,12 @@
+这个文件主要用来记录各个工具的开启过程与命令
+
+MySQL服务
+开启:net start mysql
+关闭:net stop mysql
+
+Redis
+登录guocheng
+(1)redis-cli
+(2)auth root   root为帐号
+(3)输入密码a123
+
